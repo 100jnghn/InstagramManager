@@ -34,5 +34,10 @@ namespace InstagramManager.MyData {
                 .Where(kvp => !followers.ContainsKey(kvp.Key))
                 .Select(kvp => kvp.Value);
         }
+
+        // 최근 팔로우 끊긴 계정들 반환
+        public IEnumerable<Person> GetRecentlyUnfollowed() {
+            return recentlyUnfollowed.Values;
+        }
     }
 }

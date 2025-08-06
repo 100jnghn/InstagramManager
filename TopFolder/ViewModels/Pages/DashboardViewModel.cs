@@ -23,6 +23,9 @@ namespace InstagramManager.ViewModels.Pages
         [ObservableProperty]
         private IEnumerable<Person> unfollowers;
 
+        [ObservableProperty]
+        private IEnumerable<Person> recentlyUnfollowers;
+
         #endregion
 
         #region JSON
@@ -109,6 +112,9 @@ namespace InstagramManager.ViewModels.Pages
 
             // 나를 팔로우 하지 않는 사람들의 데이터 가져오기
             Unfollowers = myJsonData.GetUnfollowers();
+
+            // 최근 팔로우 끊긴 계정 데이터 가져오기
+            RecentlyUnfollowers = myJsonData.GetRecentlyUnfollowed();
         }
 
         // 압축파일 내부 경로에서 파일을 찾아서 분류 후 변수에 할당

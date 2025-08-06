@@ -22,6 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             
         </Grid.RowDefinitions>
 
@@ -47,7 +48,7 @@
                     <Run Text="회원님을 팔로우하지 않는 계정" Foreground="Black"/>
                 </ui:TextBlock>
                 
-                <ui:DataGrid x:Name="dgUnfollower" ItemsSource="{Binding ViewModel.Unfollowers}" Width="1200" Height="600" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
+                <ui:DataGrid x:Name="dgUnfollower" ItemsSource="{Binding ViewModel.Unfollowers}" Width="800" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
                     <ui:DataGrid.Columns>
                         <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="auto"/>
 
@@ -68,6 +69,37 @@
                 </ui:DataGrid>
             </StackPanel>
         </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold">
+                    <Run Text="최근 팔로우가 끊긴 계정" Foreground="Black"/>
+                </ui:TextBlock>
+
+                <ui:DataGrid x:Name="dgRecentlyUnfollwer" ItemsSource="{Binding ViewModel.RecentlyUnfollowers}" Width="800" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
+                    <ui:DataGrid.Columns>
+                        <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="auto"/>
+
+                        <dg:DataGridTemplateColumn Header="주소" Width="auto">
+                            <dg:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                            <Hyperlink NavigateUri="{Binding Href}" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="{Binding Href}" />
+                            </Hyperlink>
+                        </TextBlock>
+                                </DataTemplate>
+                            </dg:DataGridTemplateColumn.CellTemplate>
+                        </dg:DataGridTemplateColumn>
+
+                        <dg:DataGridTextColumn Header="n일 전에 언팔로우" Binding="{Binding DateFromToday}" Width="auto"/>
+                    </ui:DataGrid.Columns>
+                </ui:DataGrid>
+            </StackPanel>
+        </Grid>
+        
+        
+        
         
     </Grid>
 </Page>
