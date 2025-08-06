@@ -13,13 +13,13 @@ namespace InstagramManager.ViewModels.Windows
         {
             new NavigationViewItem()
             {
-                Content = "Home",
+                Content = "언팔로워 조회",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
             new NavigationViewItem()
             {
-                Content = "Data",
+                Content = "맞팔로우 조회",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
             }

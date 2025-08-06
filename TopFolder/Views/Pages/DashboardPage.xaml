@@ -38,36 +38,49 @@
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
-                    
-
-                    <Grid Grid.Column="0" Margin="0,0,20,10">
-                        <ui:TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontWeight="Bold">
+                    <Grid Grid.Column="0" Margin="0,0,20,20">
+                        <ui:TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="40" FontWeight="Bold">
                             <Run Text="파일 업로드" Foreground="White"/>
                         </ui:TextBlock>
                     </Grid>
 
-                    <Grid Grid.Column="1" Margin="0,0,0,10">
-                        <ui:TextBlock x:Name="tblUploadedFiles" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                    <Grid Grid.Column="1" Margin="0,0,0,20">
+                        <ui:TextBlock x:Name="tblUploadedFiles" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontSize="15">
                             <Run Text="{Binding ViewModel.UploadMessage}" Foreground="LightSlateGray"/>
                         </ui:TextBlock>
                     </Grid>
                 </Grid>
-                
-                <ui:Button Command="{Binding ViewModel.btnFileUploadClickedCommand}" x:Name="btnOpenFile" Content="Upload File" Margin="0,0,0,10"/>
 
-                <ui:Button Command="{Binding ViewModel.btnSearchStartCommand}" x:Name="btnSearch" Content="Search Start" Visibility="Hidden"/>
+                
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Margin="10,0,10,10">
+                        <ui:Button Command="{Binding ViewModel.btnFileUploadClickedCommand}" x:Name="btnOpenFile" Content="Upload File" Width="100" Height="40" />
+                    </Grid>
+
+                    <Grid Grid.Column="1" Margin="0,0,0,10">
+                        <ui:Button Command="{Binding ViewModel.btnSearchStartCommand}" x:Name="btnSearch" Content="Search Start" Width="100" Height="40" Visibility="Hidden"/>
+                    </Grid>
+                </Grid>
+                
             </StackPanel>
         </Grid>
         <!-- 파일 업로드 끝 -->
 
         <!-- 회원님을 팔로우하지 않는 계정 시작 -->
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Vertical" Margin="0,0,0,20">
-                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="0,0,0,20">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,50">
+
+                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" >
                     <Run Text="회원님을 팔로우하지 않는 계정" Foreground="White"/>
                 </ui:TextBlock>
-                
-                <ui:DataGrid x:Name="dgUnfollower" ItemsSource="{Binding ViewModel.Unfollowers}" Width="auto" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
+
+                <ui:DataGrid x:Name="dgUnfollower" ItemsSource="{Binding ViewModel.Unfollowers}" Width="auto" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False">
                     <ui:DataGrid.Columns>
                         <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="300"/>
 
@@ -92,12 +105,12 @@
 
         <!-- 최근 팔로우 끊긴 계정 시작 -->
         <Grid Grid.Row="2">
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="0,0,0,20">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,50">
+                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,0,0,20">
                     <Run Text="최근 팔로우가 끊긴 계정" Foreground="White"/>
                 </ui:TextBlock>
 
-                <ui:DataGrid x:Name="dgRecentlyUnfollwer" ItemsSource="{Binding ViewModel.RecentlyUnfollowers}" Width="auto" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
+                <ui:DataGrid x:Name="dgRecentlyUnfollwer" ItemsSource="{Binding ViewModel.RecentlyUnfollowers}" Width="auto" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False">
                     <ui:DataGrid.Columns>
                         <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="300"/>
 
