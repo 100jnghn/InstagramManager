@@ -26,7 +26,8 @@ namespace InstagramManager.MyData {
             recentlyUnfollowed.Add(value, person);
         }
 
-        // followers에는 없지만 following에는 있는 사람 찾기
+        // followers에는 없지만 following에는 있는
+        // 사람 찾기
         // 언팔 목록 찾아서 반환
         public IEnumerable<Person> GetUnfollowers() {
             return followings

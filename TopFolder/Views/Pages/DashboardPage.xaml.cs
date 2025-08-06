@@ -1,9 +1,11 @@
 ﻿using InstagramManager.ViewModels.Pages;
 using Microsoft.Win32;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.Views.Pages
@@ -29,6 +31,11 @@ namespace InstagramManager.Views.Pages
 
                     break;
             }
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e) {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+            e.Handled = true;
         }
     }
 }

@@ -6,6 +6,8 @@
     xmlns:local="clr-namespace:InstagramManager.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:dg="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
@@ -18,6 +20,7 @@
 
     <Grid Grid.Column="0" x:Name="dashboardGrid" Visibility="Visible">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             
         </Grid.RowDefinitions>
@@ -35,8 +38,34 @@
                 </ui:TextBlock>
 
                 <ui:Button Command="{Binding ViewModel.btnSearchStartCommand}" x:Name="btnSearch" Content="Search Start" Visibility="Hidden"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold">
+                    <Run Text="회원님을 팔로우하지 않는 계정" Foreground="Black"/>
+                </ui:TextBlock>
                 
-                
+                <ui:DataGrid x:Name="dgUnfollower" ItemsSource="{Binding ViewModel.Unfollowers}" Width="1200" Height="600" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
+                    <ui:DataGrid.Columns>
+                        <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="auto"/>
+
+                        <dg:DataGridTemplateColumn Header="주소" Width="auto">
+                            <dg:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                            <Hyperlink NavigateUri="{Binding Href}" RequestNavigate="Hyperlink_RequestNavigate">
+                                                <TextBlock Text="{Binding Href}" />
+                                            </Hyperlink>
+                                        </TextBlock>
+                                </DataTemplate>
+                            </dg:DataGridTemplateColumn.CellTemplate>
+                        </dg:DataGridTemplateColumn>
+
+                        <dg:DataGridTextColumn Header="n일 동안 팔로우 함" Binding="{Binding DateFromToday}" Width="auto"/>
+                    </ui:DataGrid.Columns>
+                </ui:DataGrid>
             </StackPanel>
         </Grid>
         
