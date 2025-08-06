@@ -68,6 +68,10 @@ namespace InstagramManager
         private async void OnStartup(object sender, StartupEventArgs e)
         {
             await _host.StartAsync();
+
+            // 시작 시 다크모드로 시작
+            var themeService = Services.GetRequiredService<IThemeService>();
+            themeService.SetTheme(Wpf.Ui.Appearance.ApplicationTheme.Dark);
         }
 
         /// <summary>

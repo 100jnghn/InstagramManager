@@ -12,7 +12,7 @@ namespace InstagramManager.ViewModels.Pages
         #region PROPERTY
 
         [ObservableProperty]
-        private string uploadMessage = "파일을 업로드하세요";
+        private string uploadMessage = "Upload File을 누르고 파일을 업로드해주세요";
 
         [ObservableProperty]
         private bool isFileUploaded = false;
@@ -71,7 +71,7 @@ namespace InstagramManager.ViewModels.Pages
             UploadedFile = new FileInfo(openFileDialog.FileName);
 
             // 업로드한 파일 이름 출력
-            this.UploadMessage = UploadedFile.Name;
+            this.UploadMessage = "Search Start를 누르고 팔로워를 조회해주세요";
         }
 
         [RelayCommand]  // 파일 탐색 시작
@@ -104,7 +104,7 @@ namespace InstagramManager.ViewModels.Pages
                 parsingFollowingData();
                 parsingRecentlyUnfollowData();
 
-                UploadMessage = "데이터 분류 성공";
+                UploadMessage = "데이터 조회 성공";
             }
             catch (Exception ex) {
                 UploadMessage = $"데이터 분류 중 오류 발생: {ex.Message}";

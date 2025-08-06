@@ -19,40 +19,59 @@
     mc:Ignorable="d">
 
     <Grid Grid.Column="0" x:Name="dashboardGrid" Visibility="Visible">
+        
+        <!-- Row Definition 시작 -->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             
         </Grid.RowDefinitions>
+        <!-- Row Definition 끝 -->
 
+        <!-- 파일 업로드 시작 -->
         <Grid Grid.Row="0">
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold">
-                    <Run Text="파일 업로드" Foreground="Black"/>
-                </ui:TextBlock>
+            <StackPanel Orientation="Vertical" Margin="0,0,0,50">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-                <ui:Button Command="{Binding ViewModel.btnFileUploadClickedCommand}" x:Name="btnOpenFile" Content="Open File"/>
+                    
 
-                <ui:TextBlock x:Name="tblUploadedFiles">
-                    <Run Text="{Binding ViewModel.UploadMessage}"/>
-                </ui:TextBlock>
+                    <Grid Grid.Column="0" Margin="0,0,20,10">
+                        <ui:TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="30" FontWeight="Bold">
+                            <Run Text="파일 업로드" Foreground="White"/>
+                        </ui:TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Margin="0,0,0,10">
+                        <ui:TextBlock x:Name="tblUploadedFiles" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                            <Run Text="{Binding ViewModel.UploadMessage}" Foreground="LightSlateGray"/>
+                        </ui:TextBlock>
+                    </Grid>
+                </Grid>
+                
+                <ui:Button Command="{Binding ViewModel.btnFileUploadClickedCommand}" x:Name="btnOpenFile" Content="Upload File" Margin="0,0,0,10"/>
 
                 <ui:Button Command="{Binding ViewModel.btnSearchStartCommand}" x:Name="btnSearch" Content="Search Start" Visibility="Hidden"/>
             </StackPanel>
         </Grid>
+        <!-- 파일 업로드 끝 -->
 
+        <!-- 회원님을 팔로우하지 않는 계정 시작 -->
         <Grid Grid.Row="1">
-            <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold">
-                    <Run Text="회원님을 팔로우하지 않는 계정" Foreground="Black"/>
+            <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="0,0,0,20">
+                    <Run Text="회원님을 팔로우하지 않는 계정" Foreground="White"/>
                 </ui:TextBlock>
                 
-                <ui:DataGrid x:Name="dgUnfollower" ItemsSource="{Binding ViewModel.Unfollowers}" Width="800" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
+                <ui:DataGrid x:Name="dgUnfollower" ItemsSource="{Binding ViewModel.Unfollowers}" Width="auto" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
                     <ui:DataGrid.Columns>
-                        <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="auto"/>
+                        <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="300"/>
 
-                        <dg:DataGridTemplateColumn Header="주소" Width="auto">
+                        <dg:DataGridTemplateColumn Header="주소" Width="450">
                             <dg:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
@@ -64,42 +83,45 @@
                             </dg:DataGridTemplateColumn.CellTemplate>
                         </dg:DataGridTemplateColumn>
 
-                        <dg:DataGridTextColumn Header="n일 동안 팔로우 함" Binding="{Binding DateFromToday}" Width="auto"/>
+                        <dg:DataGridTextColumn Header="n일 동안 팔로우 함" Binding="{Binding DateFromToday}" Width="250"/>
                     </ui:DataGrid.Columns>
                 </ui:DataGrid>
             </StackPanel>
         </Grid>
+        <!-- 회원님을 팔로우하지 않는 계정 끝 -->
 
+        <!-- 최근 팔로우 끊긴 계정 시작 -->
         <Grid Grid.Row="2">
             <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold">
-                    <Run Text="최근 팔로우가 끊긴 계정" Foreground="Black"/>
+                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" FontWeight="Bold" Margin="0,0,0,20">
+                    <Run Text="최근 팔로우가 끊긴 계정" Foreground="White"/>
                 </ui:TextBlock>
 
-                <ui:DataGrid x:Name="dgRecentlyUnfollwer" ItemsSource="{Binding ViewModel.RecentlyUnfollowers}" Width="800" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
+                <ui:DataGrid x:Name="dgRecentlyUnfollwer" ItemsSource="{Binding ViewModel.RecentlyUnfollowers}" Width="auto" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" AutoGenerateColumns="False">
                     <ui:DataGrid.Columns>
-                        <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="auto"/>
+                        <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="300"/>
 
-                        <dg:DataGridTemplateColumn Header="주소" Width="auto">
+                        <dg:DataGridTemplateColumn Header="주소" Width="450">
                             <dg:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                            <Hyperlink NavigateUri="{Binding Href}" RequestNavigate="Hyperlink_RequestNavigate">
-                                <TextBlock Text="{Binding Href}" />
-                            </Hyperlink>
-                        </TextBlock>
+                                        <Hyperlink NavigateUri="{Binding Href}" RequestNavigate="Hyperlink_RequestNavigate">
+                                            <TextBlock Text="{Binding Href}" />
+                                        </Hyperlink>
+                                    </TextBlock>
                                 </DataTemplate>
                             </dg:DataGridTemplateColumn.CellTemplate>
                         </dg:DataGridTemplateColumn>
 
-                        <dg:DataGridTextColumn Header="n일 전에 언팔로우" Binding="{Binding DateFromToday}" Width="auto"/>
+                        <dg:DataGridTextColumn Header="n일 전에 언팔로우" Binding="{Binding DateFromToday}" Width="250"/>
                     </ui:DataGrid.Columns>
                 </ui:DataGrid>
             </StackPanel>
         </Grid>
-        
-        
-        
-        
+        <!-- 최근 팔로우 끊긴 계정 끝 -->
+
+
+
+
     </Grid>
 </Page>
