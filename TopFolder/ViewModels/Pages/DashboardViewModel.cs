@@ -1,7 +1,9 @@
 ﻿using Microsoft.Win32;
 using System.IO.Compression;
 using System.IO;
-using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using InstagramManager.MyData;
 
 namespace InstagramManager.ViewModels.Pages
 {
@@ -18,7 +20,22 @@ namespace InstagramManager.ViewModels.Pages
         [ObservableProperty]
         private FileInfo uploadedFile;
 
-        
+        [ObservableProperty]
+        private IEnumerable<Person> unfollowers;
+
+        #endregion
+
+        #region JSON
+
+        private JArray followers_1;
+        private JObject following;
+        private JObject recently_unfollowed_profiles;
+
+        #endregion
+
+        #region DATA
+
+        private MyJsonData myJsonData;
 
         #endregion
 
@@ -68,43 +85,219 @@ namespace InstagramManager.ViewModels.Pages
 
             this.UploadMessage = "파일 탐색 중...";
 
+            // 파일 분류
             try {
-                // 1. 파일 압축 해제
-                ZipFile.ExtractToDirectory(UploadedFile.FullName, extractTempPath, overwriteFiles: true);
-
-                // 2. 하위 폴더에서 connections 파일 탐색
-                string[] connectionsDirs = Directory.GetDirectories(extractTempPath, "connections", SearchOption.AllDirectories);
-
-                // connections 폴더를 찾을 수 없는 경우
-                if (connectionsDirs.Length == 0) {
-                    this.UploadMessage = "connections 폴더를 찾을 수 없습니다.";
-                    return;
-                }
-
-                // connections 폴더 경로
-                string connectionsPath = connectionsDirs[0];
-
-                // 3. connections 폴더에서 followers_and_following 폴더 찾기
-                string[] followDirs = Directory.GetDirectories(connectionsPath, "followers_and_following", SearchOption.AllDirectories);
-
-                // followers_and_following 폴더를 찾을 수 없는 경우
-                if(followDirs.Length == 0) {
-                    this.UploadMessage = "followers_and_following 폴더를 찾을 수 없습니다.";
-                    return;
-                }
-
-                // followers_and_following 폴더 경로
-                string followPath = followDirs[0];
-
-                //  4. followers_and_following 폴더에서 필요한 JSON 파일들 가져오기
+                categorizeFiles(extractTempPath);
+                UploadMessage = "파일 분류 성공";
             }
             catch (Exception ex) {
-                UploadMessage = $"압축 해제 중 오류 발생: {ex.Message}";
+                UploadMessage = $"파일 분류 중 오류 발생: {ex.Message}";
+            }
+
+            // JSON 데이터 파싱 
+            try {
+                myJsonData = new MyJsonData();
+                parsingFollowerData();
+                parsingFollowingData();
+                parsingRecentlyUnfollowData();
+
+                UploadMessage = "데이터 분류 성공";
+            }
+            catch (Exception ex) {
+                UploadMessage = $"데이터 분류 중 오류 발생: {ex.Message}";
+            }
+
+            // 나를 팔로우 하지 않는 사람들의 데이터 가져오기
+            Unfollowers = myJsonData.GetUnfollowers();
+        }
+
+        // 압축파일 내부 경로에서 파일을 찾아서 분류 후 변수에 할당
+        private void categorizeFiles(string extractTempPath) {
+
+            // 1. 파일 압축 해제
+            ZipFile.ExtractToDirectory(UploadedFile.FullName, extractTempPath, overwriteFiles: true);
+
+            // 2. 하위 폴더에서 connections 파일 탐색
+            string[] connectionsDirs = Directory.GetDirectories(extractTempPath, "connections", SearchOption.AllDirectories);
+
+            // connections 폴더를 찾을 수 없는 경우
+            if (connectionsDirs.Length == 0) {
+                this.UploadMessage = "connections 폴더를 찾을 수 없습니다.";
+                return;
+            }
+
+            // connections 폴더 경로
+            string connectionsPath = connectionsDirs[0];
+
+            // 3. connections 폴더에서 followers_and_following 폴더 찾기
+            string[] followDirs = Directory.GetDirectories(connectionsPath, "followers_and_following", SearchOption.AllDirectories);
+
+            // followers_and_following 폴더를 찾을 수 없는 경우
+            if (followDirs.Length == 0) {
+                this.UploadMessage = "followers_and_following 폴더를 찾을 수 없습니다.";
+                return;
+            }
+
+            // followers_and_following 폴더 경로
+            string followPath = followDirs[0];
+
+            //  4. followers_and_following 폴더에서 필요한 JSON 파일들 가져오기
+            string path;            // 파일 경로
+            string jsonContent;     // 파일 내용
+
+            // 4-A followers_1.json 파일 가져오기
+            path = Directory.GetFiles(followPath, "followers_1.json", SearchOption.TopDirectoryOnly).FirstOrDefault();
+            jsonContent = File.ReadAllText(path);
+            followers_1 = JArray.Parse(jsonContent);
+
+            // 4-B following.json 파일 가져오기
+            path = Directory.GetFiles(followPath, "following.json", SearchOption.TopDirectoryOnly).FirstOrDefault();
+            jsonContent = File.ReadAllText(path);
+            following = JObject.Parse(jsonContent);
+
+            // 4-C recently_unfollowed_profiles.json 파일 가져오기
+            path = Directory.GetFiles(followPath, "recently_unfollowed_profiles.json", SearchOption.TopDirectoryOnly).FirstOrDefault();
+            jsonContent = File.ReadAllText(path);
+            recently_unfollowed_profiles = JObject.Parse(jsonContent);
+
+        }
+
+        // 내 팔로워 목록 파싱
+        private void parsingFollowerData() {
+
+            // follwer_1.json 파일 순회하며 데이터 Parsing
+            foreach (JObject data in followers_1) {
+
+                // 데이터 하나 꺼내기
+                JArray stringList = (JArray)data["string_list_data"];
+
+                if (stringList == null) continue;
+
+
+
+                // 가져온 데이터 JObject로 변환
+                JObject person = (JObject)stringList[0];
+
+                // 프로필링크, 아이디 추출
+                string href = person["href"].ToString();
+                string value = person["value"].ToString();
+
+
+
+                // 타임스탬프 추출
+                string timestamp = person["timestamp"].ToString();
+                long time = long.Parse(timestamp);
+
+                // 타임스탬프 DataTime으로 변환
+                DateTime targetData = DateTimeOffset
+                    .FromUnixTimeSeconds(time)
+                    .ToOffset(TimeSpan.FromHours(9))
+                    .DateTime;
+
+                DateTime today = DateTime.Today.Date;
+                int dateFromToday = (today-targetData.Date).Days;
+
+
+
+                // 팔로워 객체 생성
+                Person follower = new Person(value, href, dateFromToday);
+
+                myJsonData.addFollower(value, follower);
             }
         }
 
+        // 팔로잉 목록 파싱
+        private void parsingFollowingData() {
+
+            // following.json에서 relationships_following배열 가져오기
+            JArray followingArr = (JArray)following["relationships_following"];
+
+            // follwing.json 파일 순회
+            foreach (JObject data in followingArr) {
+
+                // 배열에서 데이터 하나 꺼내기
+                JArray stringList = (JArray)data["string_list_data"];
+
+                if (stringList == null) continue;
 
 
+
+                // 가져온 데이터 JObject로 변환
+                JObject person = (JObject)stringList[0];
+
+                // 프로필링크, 아이디 추출
+                string href = person["href"].ToString();
+                string value = person["value"].ToString();
+
+
+
+                // 타임스탬프 추출
+                string timestamp = person["timestamp"].ToString();
+                long time = long.Parse(timestamp);
+
+                // 타임스탬프 DataTime으로 변환
+                DateTime targetData = DateTimeOffset
+                    .FromUnixTimeSeconds(time)
+                    .ToOffset(TimeSpan.FromHours(9))
+                    .DateTime;
+
+                DateTime today = DateTime.Today.Date;
+                int dateFromToday = (today - targetData.Date).Days;
+
+
+
+                // 팔로잉 객체 생성
+                Person following = new Person(value, href, dateFromToday);
+
+                myJsonData.addFollowing(value, following);
+            }
+        }
+
+        // 최근 언팔 목록 파싱
+        private void parsingRecentlyUnfollowData() {
+            // following.json에서 relationships_following배열 가져오기
+            JArray recentlyUnfollowArr = (JArray)recently_unfollowed_profiles["relationships_unfollowed_users"];
+
+            // follwing.json 파일 순회
+            foreach (JObject data in recentlyUnfollowArr) {
+
+                // 배열에서 데이터 하나 꺼내기
+                JArray stringList = (JArray)data["string_list_data"];
+
+                if (stringList == null) continue;
+
+
+
+                // 가져온 데이터 JObject로 변환
+                JObject person = (JObject)stringList[0];
+
+                // 프로필링크, 아이디 추출
+                string href = person["href"].ToString();
+                string value = person["value"].ToString();
+
+
+
+                // 타임스탬프 추출
+                string timestamp = person["timestamp"].ToString();
+                long time = long.Parse(timestamp);
+
+                // 타임스탬프 DataTime으로 변환
+                DateTime targetData = DateTimeOffset
+                    .FromUnixTimeSeconds(time)
+                    .ToOffset(TimeSpan.FromHours(9))
+                    .DateTime;
+
+                DateTime today = DateTime.Today.Date;
+                int dateFromToday = (today - targetData.Date).Days;
+
+
+
+                // 팔로잉 객체 생성
+                Person recentlyUnfollow = new Person(value, href, dateFromToday);
+
+                myJsonData.addRecentlyUnfollowed(value, recentlyUnfollow);
+            }
+        }
 
         #endregion
     }
