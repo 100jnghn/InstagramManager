@@ -90,7 +90,7 @@ namespace InstagramManager.ViewModels.Pages
                 return;
             }
 
-            // 압축 해제 위치 (임시 폴더 사용)
+            // 압축 해제 위치 (임시 폴더 사용)  // 경로 -> User/Appdata/Temp
             string extractTempPath = Path.Combine(Path.GetTempPath(), "TempPath");
 
             // 이미 임시 폴더가 존재하는 경우 지우고 새로 생성
@@ -110,11 +110,13 @@ namespace InstagramManager.ViewModels.Pages
             }
             catch (Exception ex) {
                 UploadMessage = $"파일 분류 중 오류 발생: {ex.Message}";
+                return;
             }
+
+            myJsonData = new MyJsonData();
 
             // JSON 데이터 파싱 
             try {
-                myJsonData = new MyJsonData();
                 parsingFollowerData();
                 parsingFollowingData();
                 parsingRecentlyUnfollowData();
@@ -123,6 +125,7 @@ namespace InstagramManager.ViewModels.Pages
             }
             catch (Exception ex) {
                 UploadMessage = $"데이터 분류 중 오류 발생: {ex.Message}";
+                return;
             }
 
             // 나를 팔로우 하지 않는 사람들의 데이터 가져오기
@@ -136,7 +139,15 @@ namespace InstagramManager.ViewModels.Pages
         private void categorizeFiles(string extractTempPath) {
 
             // 1. 파일 압축 해제
-            ZipFile.ExtractToDirectory(UploadedFile.FullName, extractTempPath, overwriteFiles: true);
+            try {
+                ZipFile.ExtractToDirectory(UploadedFile.FullName, extractTempPath, overwriteFiles: true);
+            }
+            catch (Exception ex) {
+                UploadMessage = $"zip파일 압축 실패: {ex.Message}";
+                return;
+            }
+
+
 
             // 2. 하위 폴더에서 connections 파일 탐색
             string[] connectionsDirs = Directory.GetDirectories(extractTempPath, "connections", SearchOption.AllDirectories);
@@ -150,6 +161,8 @@ namespace InstagramManager.ViewModels.Pages
             // connections 폴더 경로
             string connectionsPath = connectionsDirs[0];
 
+
+
             // 3. connections 폴더에서 followers_and_following 폴더 찾기
             string[] followDirs = Directory.GetDirectories(connectionsPath, "followers_and_following", SearchOption.AllDirectories);
 
@@ -162,6 +175,8 @@ namespace InstagramManager.ViewModels.Pages
             // followers_and_following 폴더 경로
             string followPath = followDirs[0];
 
+
+
             //  4. followers_and_following 폴더에서 필요한 JSON 파일들 가져오기
             string path;            // 파일 경로
             string jsonContent;     // 파일 내용
@@ -170,7 +185,7 @@ namespace InstagramManager.ViewModels.Pages
             path = Directory.GetFiles(followPath, "followers_1.json", SearchOption.TopDirectoryOnly).FirstOrDefault();
             jsonContent = File.ReadAllText(path);
             followers_1 = JArray.Parse(jsonContent);
-
+            
             // 4-B following.json 파일 가져오기
             path = Directory.GetFiles(followPath, "following.json", SearchOption.TopDirectoryOnly).FirstOrDefault();
             jsonContent = File.ReadAllText(path);
@@ -180,11 +195,15 @@ namespace InstagramManager.ViewModels.Pages
             path = Directory.GetFiles(followPath, "recently_unfollowed_profiles.json", SearchOption.TopDirectoryOnly).FirstOrDefault();
             jsonContent = File.ReadAllText(path);
             recently_unfollowed_profiles = JObject.Parse(jsonContent);
-
         }
 
         // 내 팔로워 목록 파싱
         private void parsingFollowerData() {
+
+            if(followers_1 == null) {
+                UploadMessage = "followers_1.json 파일이 존재하지 않습니다.";
+                return;
+            }
 
             // follwer_1.json 파일 순회하며 데이터 Parsing
             foreach (JObject data in followers_1) {
