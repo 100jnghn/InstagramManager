@@ -128,9 +128,28 @@
         <!-- 최근 팔로우 끊긴 계정 시작 -->
         <Grid Grid.Row="2">
             <StackPanel Orientation="Vertical" Margin="0,0,0,50">
-                <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,0,0,20">
-                    <Run Text="최근 팔로우가 끊긴 계정" Foreground="White"/>
-                </ui:TextBlock>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Width="700">
+                        <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Margin="0,0,0,20">
+                            <Run Text="최근 팔로우가 끊긴 계정" Foreground="White"/>
+                        </ui:TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Width="300">
+                        <ui:Button x:Name="btnExelRecentlyUnfollower" Command="{Binding ViewModel.exportExcelRecentlyUnfollowerCommand}" HorizontalAlignment="Right" Width="120" Visibility="Hidden">
+                            <Run Text="엑셀 파일로 저장" FontSize="12" Foreground="LawnGreen"/>
+                        </ui:Button>
+                    </Grid>
+
+                </Grid>
+                
+                
 
                 <ui:DataGrid x:Name="dgRecentlyUnfollwer" ItemsSource="{Binding ViewModel.RecentlyUnfollowers}" Width="auto" Height="250" VerticalAlignment="Center" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False">
                     <ui:DataGrid.Columns>

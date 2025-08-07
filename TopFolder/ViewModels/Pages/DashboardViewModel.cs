@@ -106,6 +106,54 @@ namespace InstagramManager.ViewModels.Pages
             }
         }
 
+        [RelayCommand]
+        private void exportExcelRecentlyUnfollower() {
+
+            if (RecentlyUnfollowers == null || !RecentlyUnfollowers.Any()) {
+                // 내보낼 언팔로워가 없습니다.
+                return;
+            }
+
+            try {
+                using (var workbook = new ClosedXML.Excel.XLWorkbook()) {
+
+                    var worksheet = workbook.Worksheets.Add("언팔로워");
+
+                    worksheet.Cell(1, 1).Value = "아이디";
+                    worksheet.Cell(1, 2).Value = "주소";
+                    worksheet.Cell(1, 3).Value = "언팔로우한 일수";
+
+
+
+                    int row = 2;
+
+                    foreach (var item in RecentlyUnfollowers) {
+                        worksheet.Cell(row, 1).Value = item.Value;
+                        worksheet.Cell(row, 2).Value = item.Href;
+                        worksheet.Cell(row, 3).Value = item.DateFromToday;
+
+                        row++;
+                    }
+
+                    // 열 너비 지정
+                    worksheet.Column(1).AdjustToContents();
+                    worksheet.Column(2).AdjustToContents();
+                    worksheet.Column(3).Width = 15;
+
+                    // 저장 경로 (로컬저장소 -> 다운로드)
+                    string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+                    string filePath = Path.Combine(downloadPath, "Recently_Unfollowers.xlsx");
+
+                    // 저장
+                    workbook.SaveAs(filePath);
+                }
+            }
+            catch (Exception ex) {
+                // 에러 메시지
+                return;
+            }
+        }
+
         [RelayCommand]  // 파일 업로드 버튼 클릭
         private void btnFileUploadClicked() {
             OpenFileDialog openFileDialog = new OpenFileDialog()
