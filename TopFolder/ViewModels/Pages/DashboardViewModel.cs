@@ -4,6 +4,8 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using InstagramManager.MyData;
+using Microsoft.VisualBasic.FileIO;
+using SearchOption = System.IO.SearchOption;
 
 namespace InstagramManager.ViewModels.Pages
 {
@@ -90,6 +92,11 @@ namespace InstagramManager.ViewModels.Pages
 
             // 압축 해제 위치 (임시 폴더 사용)
             string extractTempPath = Path.Combine(Path.GetTempPath(), "TempPath");
+
+            // 이미 임시 폴더가 존재하는 경우 지우고 새로 생성
+            if(File.Exists(extractTempPath)) {
+                Directory.Delete(extractTempPath, true);
+            }
 
             // 임시 폴더 생성
             Directory.CreateDirectory(extractTempPath);
