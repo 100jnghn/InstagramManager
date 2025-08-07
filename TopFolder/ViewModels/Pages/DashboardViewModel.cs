@@ -87,6 +87,11 @@ namespace InstagramManager.ViewModels.Pages
                         row++;
                     }
 
+                    // 열 너비 지정
+                    worksheet.Column(1).AdjustToContents();
+                    worksheet.Column(2).AdjustToContents();
+                    worksheet.Column(3).Width = 15;
+
                     // 저장 경로 (로컬저장소 -> 다운로드)
                     string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
                     string filePath = Path.Combine(downloadPath, "Unfollowers.xlsx");
