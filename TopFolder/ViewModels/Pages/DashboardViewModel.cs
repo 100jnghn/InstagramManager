@@ -76,7 +76,15 @@ namespace InstagramManager.ViewModels.Pages
 
         [RelayCommand]  // 파일 탐색 시작
         private void btnSearchStart() {
+
             if (UploadedFile == null) {
+                this.UploadMessage = "파일이 업로드 되지 않았습니다.";
+                return;
+            }
+
+            // 인스타 파일이 아닌 경우 종료
+            if(!UploadedFile.Name.StartsWith("instagram-") || !UploadedFile.Name.EndsWith(".zip")) {
+                this.UploadMessage = "올바른 파일 형식이 아닙니다.";
                 return;
             }
 
