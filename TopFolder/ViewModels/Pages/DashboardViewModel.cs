@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using InstagramManager.MyData;
 using Microsoft.VisualBasic.FileIO;
 using SearchOption = System.IO.SearchOption;
+using ClosedXML.Excel;
 
 namespace InstagramManager.ViewModels.Pages
 {
@@ -53,6 +54,49 @@ namespace InstagramManager.ViewModels.Pages
         #endregion
 
         #region COMMAND
+
+        [RelayCommand]
+        private void exportExcelUnfollower() {
+
+            if (Unfollowers == null || !Unfollowers.Any()) {
+                // 내보낼 언팔로워가 없습니다.
+                return;
+            }
+
+            try {
+                using (var workbook = new ClosedXML.Excel.XLWorkbook()) {
+
+                    var worksheet = workbook.Worksheets.Add("언팔로워");
+
+                    worksheet.Cell(1, 1).Value = "아이디";
+                    worksheet.Cell(1, 2).Value = "주소";
+                    worksheet.Cell(1, 3).Value = "팔로우한 날";
+
+
+
+                    int row = 2;
+
+                    foreach (var item in Unfollowers) {
+                        worksheet.Cell(row, 1).Value = item.Value;
+                        worksheet.Cell(row, 2).Value = item.Href;
+                        worksheet.Cell(row, 3).Value = item.DateFromToday;
+
+                        row++;
+                    }
+
+                    // 저장 경로
+                    string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+                    string filePath = Path.Combine(downloadPath, "Unfollowers.xlsx");
+
+                    // 저장
+                    workbook.SaveAs(filePath);
+                }
+            }
+            catch (Exception ex) {
+                // 에러 메시지
+                return;
+            }
+        }
 
         [RelayCommand]  // 파일 업로드 버튼 클릭
         private void btnFileUploadClicked() {
