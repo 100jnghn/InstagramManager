@@ -21,6 +21,9 @@ namespace InstagramManager.ViewModels.Pages
         private bool isFileUploaded = false;
 
         [ObservableProperty]
+        private bool isSearchFinished = false;
+
+        [ObservableProperty]
         private FileInfo uploadedFile;
 
         [ObservableProperty]
@@ -70,7 +73,7 @@ namespace InstagramManager.ViewModels.Pages
 
                     worksheet.Cell(1, 1).Value = "아이디";
                     worksheet.Cell(1, 2).Value = "주소";
-                    worksheet.Cell(1, 3).Value = "팔로우한 날";
+                    worksheet.Cell(1, 3).Value = "팔로우한 일수";
 
 
 
@@ -84,7 +87,7 @@ namespace InstagramManager.ViewModels.Pages
                         row++;
                     }
 
-                    // 저장 경로
+                    // 저장 경로 (로컬저장소 -> 다운로드)
                     string downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
                     string filePath = Path.Combine(downloadPath, "Unfollowers.xlsx");
 
@@ -177,6 +180,9 @@ namespace InstagramManager.ViewModels.Pages
 
             // 최근 팔로우 끊긴 계정 데이터 가져오기
             RecentlyUnfollowers = myJsonData.GetRecentlyUnfollowed();
+
+            // 파일 탐색 성공 플래그
+            IsSearchFinished = true;
         }
 
         // 압축파일 내부 경로에서 파일을 찾아서 분류 후 변수에 할당

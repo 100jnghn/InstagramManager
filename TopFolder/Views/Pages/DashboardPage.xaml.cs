@@ -28,6 +28,10 @@ namespace InstagramManager.Views.Pages
             switch (e.PropertyName) {
                 case "IsFileUploaded":
                     this.btnSearch.Visibility = Visibility.Visible;
+
+                    break;
+
+                case "IsSearchFinished":
                     this.btnExelUnfollower.Visibility = Visibility.Visible;
 
                     break;
