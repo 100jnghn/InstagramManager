@@ -35,6 +35,23 @@ namespace InstagramManager.MyData {
                 .Select(kvp => kvp.Value);
         }
 
+        // 맞팔 목록 반환
+        // 맞팔 날짜는 follower.DateFromToday / following.DateFromToday 중 작은 값
+        public IEnumerable<Person> GetF4F() {
+            return followings
+                .Where(kvp => followers.ContainsKey(kvp.Key))
+                .Select(kvp => {
+
+                    var id = kvp.Key;
+                    var following = kvp.Value;
+                    var follower = followers[id];
+
+                    var date = Math.Min(following.DateFromToday, follower.DateFromToday);
+
+                    return new Person(following.Value, following.Href, date);
+                });
+        }
+
         // 최근 팔로우 끊긴 계정들 반환
         public IEnumerable<Person> GetRecentlyUnfollowed() {
             return recentlyUnfollowed.Values;

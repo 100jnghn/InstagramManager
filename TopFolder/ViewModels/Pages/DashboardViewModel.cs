@@ -15,7 +15,7 @@ namespace InstagramManager.ViewModels.Pages
         #region PROPERTY
 
         [ObservableProperty]
-        private string uploadMessage = "Upload File을 누르고 파일을 업로드해주세요";
+        private string uploadMessage = "Upload File을 누르고 파일을 업로드해 주세요";
 
         [ObservableProperty]
         private bool isFileUploaded = false;
@@ -31,6 +31,9 @@ namespace InstagramManager.ViewModels.Pages
 
         [ObservableProperty]
         private IEnumerable<Person> recentlyUnfollowers;
+
+        [ObservableProperty]
+        private IEnumerable<Person> f4f;
 
         #endregion
 
@@ -176,7 +179,7 @@ namespace InstagramManager.ViewModels.Pages
             this.UploadMessage = "Search Start를 누르고 팔로워를 조회해주세요";
         }
 
-        [RelayCommand]  // 파일 탐색 시작
+        [RelayCommand]  // 파일 탐색 시작 버튼 클릭
         private void btnSearchStart() {
 
             if (UploadedFile == null) {
@@ -233,6 +236,9 @@ namespace InstagramManager.ViewModels.Pages
 
             // 최근 팔로우 끊긴 계정 데이터 가져오기
             RecentlyUnfollowers = myJsonData.GetRecentlyUnfollowed();
+
+            // 맞팔 정보 가져오기
+            F4f = myJsonData.GetF4F();
 
             // 파일 탐색 성공 플래그
             IsSearchFinished = true;
