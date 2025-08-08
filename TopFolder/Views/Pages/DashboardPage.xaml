@@ -57,14 +57,21 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0" Margin="10,0,10,10">
-                        <ui:Button Command="{Binding ViewModel.btnFileUploadClickedCommand}" x:Name="btnOpenFile" Content="Upload File" Width="100" Height="40" />
+                        <ui:Button Command="{Binding ViewModel.btnFileUploadClickedCommand}" x:Name="btnOpenFile" Content="파일 선택" Width="100" Height="40" HorizontalAlignment="Left"/>
                     </Grid>
 
-                    <Grid Grid.Column="1" Margin="0,0,0,10">
-                        <ui:Button Command="{Binding ViewModel.btnSearchStartCommand}" x:Name="btnSearch" Content="Search Start" Width="100" Height="40" Visibility="Hidden"/>
+                    <Grid Grid.Column="1" Margin="0,0,10,10">
+                        <ui:Button Command="{Binding ViewModel.btnSearchStartCommand}" x:Name="btnSearch" Content="조회 시작" Width="100" Height="40" HorizontalAlignment="Left" Visibility="Hidden"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0,0,0,10" Width="820">
+                        <ui:Button Command="{Binding ViewModel.btnSaveF4FInformationCommand}" x:Name="btnSaveF4F" Width="130" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden">
+                            <Run Text="맞팔로우 정보 저장" FontSize="12"/>
+                        </ui:Button>
                     </Grid>
                 </Grid>
                 
@@ -91,7 +98,7 @@
                     </Grid>
 
                     <Grid Grid.Column="1" Width="300">
-                        <ui:Button x:Name="btnExelUnfollower" Command="{Binding ViewModel.exportExcelUnfollowerCommand}" HorizontalAlignment="Right" Width="120" Visibility="Hidden">
+                        <ui:Button x:Name="btnExelUnfollower" Command="{Binding ViewModel.btnExportExcelUnfollowerCommand}" HorizontalAlignment="Right" Width="130" Visibility="Hidden">
                             <Run Text="엑셀 파일로 저장" FontSize="12" Foreground="LawnGreen"/>
                         </ui:Button>
                     </Grid>
@@ -142,7 +149,7 @@
                     </Grid>
 
                     <Grid Grid.Column="1" Width="300">
-                        <ui:Button x:Name="btnExelRecentlyUnfollower" Command="{Binding ViewModel.exportExcelRecentlyUnfollowerCommand}" HorizontalAlignment="Right" Width="120" Visibility="Hidden">
+                        <ui:Button x:Name="btnExelRecentlyUnfollower" Command="{Binding ViewModel.btnExportExcelRecentlyUnfollowerCommand}" HorizontalAlignment="Right" Width="130" Visibility="Hidden">
                             <Run Text="엑셀 파일로 저장" FontSize="12" Foreground="LawnGreen"/>
                         </ui:Button>
                     </Grid>

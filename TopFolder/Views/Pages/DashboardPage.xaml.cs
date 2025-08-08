@@ -34,6 +34,7 @@ namespace InstagramManager.Views.Pages
                 case "IsSearchFinished":
                     this.btnExelUnfollower.Visibility = Visibility.Visible;
                     this.btnExelRecentlyUnfollower.Visibility = Visibility.Visible;
+                    this.btnSaveF4F.Visibility = Visibility.Visible;
 
                     break;
             }

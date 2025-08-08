@@ -61,8 +61,8 @@ namespace InstagramManager.ViewModels.Pages
 
         #region COMMAND
 
-        [RelayCommand]
-        private void exportExcelUnfollower() {
+        [RelayCommand]  // 언팔로워 엑셀 파일로 저장 버튼
+        private void btnExportExcelUnfollower() {
 
             if (Unfollowers == null || !Unfollowers.Any()) {
                 // 내보낼 언팔로워가 없습니다.
@@ -109,8 +109,8 @@ namespace InstagramManager.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
-        private void exportExcelRecentlyUnfollower() {
+        [RelayCommand]  // 최근 언팔로워 엑셀 파일로 저장 버튼
+        private void btnExportExcelRecentlyUnfollower() {
 
             if (RecentlyUnfollowers == null || !RecentlyUnfollowers.Any()) {
                 // 내보낼 언팔로워가 없습니다.
@@ -155,6 +155,14 @@ namespace InstagramManager.ViewModels.Pages
                 // 에러 메시지
                 return;
             }
+        }
+
+        [RelayCommand]  // 맞팔로워 정보 DB에 저장
+        private void btnSaveF4FInformation() {
+            
+            // 1. DB가 존재하지 않는다면 DB 생성 후 f4f 값 할당
+
+            // 2. DB가 존재한다면 DB의 값들을 모두 지우고 새로운 f4f 값 할당
         }
 
         [RelayCommand]  // 파일 업로드 버튼 클릭
