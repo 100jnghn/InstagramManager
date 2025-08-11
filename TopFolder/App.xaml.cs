@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
-using System.Windows.Threading;
+﻿using InstagramManager.Interfaces;
 using InstagramManager.Services;
 using InstagramManager.ViewModels.Pages;
 using InstagramManager.ViewModels.Windows;
@@ -9,6 +7,9 @@ using InstagramManager.Views.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Reflection;
+using System.Windows.Threading;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
 
@@ -52,6 +53,10 @@ namespace InstagramManager
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                // Database 서비스 등록
+                services.AddSingleton<IDatabase<FollowForFollow>, FollowForFollowService>();
+
             }).Build();
 
         /// <summary>
