@@ -54,9 +54,6 @@ namespace InstagramManager
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
 
-                // Database 서비스 등록
-                services.AddSingleton<IDatabase<FollowForFollow>, FollowForFollowService>();
-
             }).Build();
 
         /// <summary>

@@ -1,5 +1,4 @@
 ﻿using System.Windows.Media;
-using InstagramManager.Interfaces;
 using InstagramManager.Models;
 using InstagramManager.MyData;
 using RBush;
@@ -9,7 +8,6 @@ namespace InstagramManager.ViewModels.Pages
 {
     public partial class DataViewModel : ObservableObject, INavigationAware
     {
-        private readonly IDatabase<FollowForFollow> database;
         private bool _isInitialized = false;
 
         [ObservableProperty]
