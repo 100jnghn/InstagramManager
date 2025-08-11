@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace InstagramManager.Interfaces
 {
-    interface IDatabase<T> {
+    public interface IDatabase<T> {
+
         // 테이블에 대한 모든 DATA 조회
         List<T>? Get();
 
