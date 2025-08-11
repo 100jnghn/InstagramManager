@@ -39,7 +39,7 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <ui:DataGrid x:Name="dgF4F" ItemsSource="{Binding ViewModel.F4f}" Width="auto" Height="600" VerticalAlignment="Top" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False">
+            <ui:DataGrid x:Name="dgF4F" ItemsSource="{Binding ViewModel.F4f}" Width="auto" Height="400" VerticalAlignment="Top" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" Margin="0,0,0,10">
                 <ui:DataGrid.Columns>
                     <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="300"/>
 
@@ -47,10 +47,10 @@
                             <dg:DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                            <Hyperlink NavigateUri="{Binding Href}" RequestNavigate="Hyperlink_RequestNavigate">
-                                                <TextBlock Text="{Binding Href}" />
-                                            </Hyperlink>    
-                                        </TextBlock>
+                                        <Hyperlink NavigateUri="{Binding Href}" RequestNavigate="Hyperlink_RequestNavigate">
+                                            <TextBlock Text="{Binding Href}" />
+                                        </Hyperlink>    
+                                    </TextBlock>
                                 </DataTemplate>
                             </dg:DataGridTemplateColumn.CellTemplate>
                         </dg:DataGridTemplateColumn>
