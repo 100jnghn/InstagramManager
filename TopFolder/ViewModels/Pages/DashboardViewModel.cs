@@ -162,8 +162,17 @@ namespace InstagramManager.ViewModels.Pages
         [RelayCommand]  // 맞팔로워 정보 DB에 저장
         private void btnSaveF4FInformation() {
 
+            var f4fList = myJsonData.GetF4F();
+
+            if (f4fList == null || !f4fList.Any()) {
+                MessageBox.Show("맞팔로워가 없습니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             // DataViewModel의 f4f에 값 전달
-            _dataViewModel.F4f = myJsonData.GetF4F();
+            _dataViewModel.F4f = f4fList;
+
+            MessageBox.Show($"맞팔로워 {f4fList.Count()}명의 정보를 생성했습니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         [RelayCommand]  // 파일 업로드 버튼 클릭
