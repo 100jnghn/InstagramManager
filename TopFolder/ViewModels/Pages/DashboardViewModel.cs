@@ -35,6 +35,8 @@ namespace InstagramManager.ViewModels.Pages
         [ObservableProperty]
         private IEnumerable<Person> f4f;
 
+        private readonly DataViewModel _dataViewModel;
+
         #endregion
 
         #region JSON
@@ -53,8 +55,8 @@ namespace InstagramManager.ViewModels.Pages
 
         #region CONSTRUCTOR
 
-        public DashboardViewModel() {
-            
+        public DashboardViewModel(DataViewModel dataViewModel) {
+            _dataViewModel = dataViewModel;
         }
 
         #endregion
@@ -159,10 +161,9 @@ namespace InstagramManager.ViewModels.Pages
 
         [RelayCommand]  // 맞팔로워 정보 DB에 저장
         private void btnSaveF4FInformation() {
-            
-            // 1. DB가 존재하지 않는다면 DB 생성 후 f4f 값 할당
 
-            // 2. DB가 존재한다면 DB의 값들을 모두 지우고 새로운 f4f 값 할당
+            // DataViewModel의 f4f에 값 전달
+            _dataViewModel.F4f = myJsonData.GetF4F();
         }
 
         [RelayCommand]  // 파일 업로드 버튼 클릭

@@ -1,5 +1,7 @@
 ﻿using System.Windows.Media;
 using InstagramManager.Models;
+using InstagramManager.MyData;
+using RBush;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.ViewModels.Pages
@@ -8,6 +10,8 @@ namespace InstagramManager.ViewModels.Pages
     {
         private bool _isInitialized = false;
 
+        [ObservableProperty]
+        private IEnumerable<Person> f4f;
         
         public Task OnNavigatedToAsync()
         {
