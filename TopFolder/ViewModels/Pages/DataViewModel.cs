@@ -33,6 +33,9 @@ namespace InstagramManager.ViewModels.Pages
         private bool isF4FUpdated;
 
         [ObservableProperty]
+        private FollowForFollowTable? selectedRow;
+
+        [ObservableProperty]
         private string selectedID;
 
         [ObservableProperty]
@@ -180,6 +183,13 @@ namespace InstagramManager.ViewModels.Pages
             foreach (var idValue in database.GetAllData().Select(d => d.Id)) {
                 Id.Add(idValue);
             }
+        }
+
+        partial void OnSelectedRowChanged(FollowForFollowTable? value) {
+            if (value == null) return;
+            
+            SelectedID = value.Id;
+            btnSearch();    
         }
 
         #endregion

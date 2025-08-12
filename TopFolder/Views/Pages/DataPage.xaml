@@ -43,7 +43,16 @@
 
         <!--맞팔 DataGrid -->
         <Grid Grid.Row="2" Margin="0,0,0,30">
-            <ui:DataGrid x:Name="dgF4F" ItemsSource="{Binding ViewModel.F4fDatabase}" Width="auto" Height="350" VerticalAlignment="Top" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" Margin="0,0,0,10">
+            <ui:DataGrid 
+                x:Name="dgF4F" 
+                ItemsSource="{Binding ViewModel.F4fDatabase}" 
+                SelectedItem="{Binding ViewModel.SelectedRow, Mode=TwoWay}"
+                Width="auto" Height="350" 
+                VerticalAlignment="Top" HorizontalAlignment="Left" 
+                GridLinesVisibility="Horizontal" 
+                AutoGenerateColumns="False"
+                Margin="0,0,0,10">
+                
                 <ui:DataGrid.Columns>
                     
                     <!-- 맞팔 아이디 -->
