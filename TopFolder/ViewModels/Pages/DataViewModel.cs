@@ -1,7 +1,4 @@
-﻿using System.Windows.Media;
-using InstagramManager.Models;
-using InstagramManager.MyData;
-using RBush;
+﻿using InstagramManager.MyData;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.ViewModels.Pages
@@ -28,8 +25,8 @@ namespace InstagramManager.ViewModels.Pages
             
         private void InitializeViewModel()
         {
-            
             _isInitialized = true;
         }
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using InstagramManager.Interfaces;
-using InstagramManager.Services;
+﻿using InstagramManager.Services;
 using InstagramManager.ViewModels.Pages;
 using InstagramManager.ViewModels.Windows;
 using InstagramManager.Views.Pages;
