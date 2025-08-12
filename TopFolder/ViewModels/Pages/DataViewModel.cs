@@ -1,7 +1,10 @@
-﻿using InstagramManager.Interfaces;
+﻿using DocumentFormat.OpenXml.Presentation;
+using InstagramManager.Interfaces;
 using InstagramManager.Models;
 using InstagramManager.MyData;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Data.Common;
+using System.Reflection.Metadata;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.ViewModels.Pages
@@ -58,7 +61,59 @@ namespace InstagramManager.ViewModels.Pages
 
             // db가 있는 경우 -> table 데이터 지우고 f4f 할당
             else if (database.GetAllData().Count > 0) {
-                // 값 비교?
+
+                // db 데이터 가져오기
+                var data = database.GetAllData();
+
+                // LinQ를 사용해 f4f, db의 ID를 Hashset으로 가져오기
+                var dbID = data.Select(f => f.Id).ToHashSet();
+                var f4fID = F4f.Select(f=>f.Value).ToHashSet();
+
+
+                // Q. 아이디를 바꾼 경우는 어떡함???
+                // 1. F4f에 있고 database에 있음 -> Update
+                var updateId = dbID.Intersect(f4fID);
+
+                foreach(var id in updateId) {
+
+                    // database에서 일치하는 ID 찾기
+                    var entity = data.FirstOrDefault(d=>d.Id == id);
+
+                    // F4F에서 일치하는 ID 찾기
+                    var updateEntity = F4f.FirstOrDefault(f=>f.Value == id);
+
+                    // 변경사항 반영
+                    entity.Id = updateEntity!.Value;
+                    entity.Address = updateEntity.Href;
+                    entity.Date = updateEntity.DateFromToday;
+
+                    database.UpdateData(entity);
+                }
+
+                // 2. F4f에 있고 database에 없음 -> Insert
+                var insertId = f4fID.Except(dbID);
+
+                foreach(var id in insertId) {
+
+                    // F4F에서 일치하는 ID 찾기
+                    var updateEntity = F4f.FirstOrDefault(f => f.Value == id);
+
+                    var entity = new FollowForFollowTable
+                    {
+                        Id = updateEntity!.Value,
+                        Address = updateEntity.Href,
+                        Date = updateEntity.DateFromToday,
+                    };
+
+                    database.InsertData(entity);
+                }
+
+                // 3. F4f에 없고 database에 있음 -> Delete
+                var deleteId = dbID.Except(f4fID);
+
+                foreach(var id in deleteId) {
+                    database.DeleteData(id);
+                }
             }
         }
 
