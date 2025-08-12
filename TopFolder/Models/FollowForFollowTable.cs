@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace InstagramManager.Models;
+﻿namespace InstagramManager.Models;
 
 public partial class FollowForFollowTable
 {

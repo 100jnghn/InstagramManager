@@ -1,8 +1,10 @@
-﻿using InstagramManager.Services;
+﻿using InstagramManager.Models;
+using InstagramManager.Services;
 using InstagramManager.ViewModels.Pages;
 using InstagramManager.ViewModels.Windows;
 using InstagramManager.Views.Pages;
 using InstagramManager.Views.Windows;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -52,6 +54,9 @@ namespace InstagramManager
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                // Postgre DB Context 등록
+                services.AddDbContext<InstagramManagerDatabaseContext>();
 
             }).Build();
 
