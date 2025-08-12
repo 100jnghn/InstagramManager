@@ -15,16 +15,26 @@ namespace InstagramManager.ViewModels.Pages
 
         private readonly IDatabase<FollowForFollowTable> database;
 
+        #region PROPERTY
+
         [ObservableProperty]
         private IEnumerable<Person> f4f;
 
         [ObservableProperty]
+        private List<string> id;
+
+        [ObservableProperty]
         private bool isF4FUpdated;
+
+        #endregion
+
+        #region CONSTRUCTOR
 
         // 생성자에서 db 초기화
         public DataViewModel(IDatabase<FollowForFollowTable> database) {
             this.database = database;
         }
+        #endregion
 
         public Task OnNavigatedToAsync()
         {
@@ -40,6 +50,8 @@ namespace InstagramManager.ViewModels.Pages
         {
             _isInitialized = true;
         }
+
+        #region METHOD
 
         // Dashboard에서 맞팔 정보를 생성하면 호출하는 함수
         public void MakeDatabase() {
@@ -115,7 +127,20 @@ namespace InstagramManager.ViewModels.Pages
                     database.DeleteData(id);
                 }
             }
+
+            // db 만든 후 id만 리스트에 저장
+            MakeIDList();
         }
 
+        // DB에서 맞팔로우 아이디를 id에 저장
+        private void MakeIDList() {
+            Id = F4f.Select(p => p.Value).ToList();
+        }
+
+        #endregion
+
+        #region COMMAND
+        
+        #endregion
     }
 }
