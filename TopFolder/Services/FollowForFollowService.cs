@@ -24,14 +24,10 @@ namespace InstagramManager.Services
 
         // 맞팔 table 특정 data 반환
         public FollowForFollowTable? GetData(string id) {
-            var validData = this.dbContext.FollowForFollowTables.FirstOrDefault(c=> c.Id == id);
 
-            if (validData != null) {
-                return validData;
-            }
-            else {
-                throw new InvalidOperationException();
-            }
+            // 일치하는 id에 해당하는 data를 반환
+            // 일치하는 id가 없으면 null을 반환
+            return this.dbContext.FollowForFollowTables.FirstOrDefault(c => c.Id == id);
         }
 
         // 특정 entity 삽입

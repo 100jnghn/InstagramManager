@@ -39,10 +39,10 @@ namespace InstagramManager.ViewModels.Pages
         private string selectedAddress;
 
         [ObservableProperty]
-        private string selectedDate;
+        private int selectedDate;
 
         [ObservableProperty]
-        private string selectedDescription;
+        private string? selectedDescription;
 
         #endregion
 
@@ -124,6 +124,7 @@ namespace InstagramManager.ViewModels.Pages
                     entity.Id = updateEntity!.Value;
                     entity.Address = updateEntity.Href;
                     entity.Date = updateEntity.DateFromToday;
+                    // entity.Description은 유지
 
                     database.UpdateData(entity);
                 }
@@ -157,14 +158,19 @@ namespace InstagramManager.ViewModels.Pages
 
 
             // 뷰에 사용할 f4f데이터 변경
-            F4fDatabase.Clear();
-
-            foreach(var entity in database.GetAllData()) {
-                F4fDatabase.Add(entity);
-            }
+            LoadDatabase();
 
             // db 만든 후 id만 리스트에 저장
             MakeIDList();
+        }
+
+        // F4fDatabase를 새롭게 reload
+        private void LoadDatabase() {
+            F4fDatabase.Clear();
+
+            foreach (var entity in database.GetAllData()) {
+                F4fDatabase.Add(entity);
+            }
         }
 
         // DB에서 맞팔로우 아이디를 id에 저장
@@ -182,7 +188,36 @@ namespace InstagramManager.ViewModels.Pages
 
         [RelayCommand]
         private void btnSearch() {
+            var entity = database.GetData(SelectedID);
 
+            if (entity == null) {
+                // 일치하는 id 없음
+                return;
+            }
+
+            this.SelectedAddress = entity.Address;
+            this.SelectedDate = entity.Date;
+            this.SelectedDescription = entity.Description;
+        }
+
+        [RelayCommand]
+        private void btnSaveMemo() {
+            try {
+                // ID에 해당하는 데이터를 가져옴
+                var data = this.database.GetData(this.SelectedID);
+
+                // 가져온 데이터에 현재 입력된 메모 할당
+                data.Description = this.SelectedDescription;
+                
+                // db 업데이트
+                this.database.UpdateData(data);
+
+                // 데이터 새로 불러오기
+                LoadDatabase();
+            }
+            catch (Exception) {
+                MessageBox.Show($"존재하지 않는 ID입니다.", "에러", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         
         #endregion

@@ -47,7 +47,7 @@
                 <ui:DataGrid.Columns>
                     
                     <!-- 맞팔 아이디 -->
-                    <dg:DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="270"/>
+                    <dg:DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="270" />
     
                     <!-- 맞팔 인스타 주소 -->
                     <dg:DataGridTemplateColumn Header="주소" Width="430">
@@ -87,23 +87,31 @@
 
             <Grid Grid.Row="1">
                 <StackPanel Orientation="Vertical" Width="1000" HorizontalAlignment="Left" Margin="30,0,0,0">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,50" HorizontalAlignment="Left">
                         
-                        <ui:TextBlock Text="ID" Width="30" TextAlignment="Right" Foreground="White" Margin="0,0,10,0"/>
-                        <ui:TextBlock Text="test ID" Width="250" TextAlignment="Left" Foreground="White" Margin="0,0,10,0"/>
-                        
-                        <ui:TextBlock Text="주소" Width="30" TextAlignment="Right" Foreground="White" Margin="0,0,10,0"/>
-                        <ui:TextBlock Width="450" TextAlignment="Left">
+                        <ui:TextBlock Text="ID" Width="30" HorizontalAlignment="Left" TextAlignment="Right" Foreground="White" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <ui:TextBlock Text="{Binding ViewModel.SelectedID}" Width="250" HorizontalAlignment="Left" TextAlignment="Left" Foreground="White" Margin="0,0,10,0"/>
+
+                        <ui:TextBlock Text="주소" Width="30" HorizontalAlignment="Left" TextAlignment="Right" Foreground="White" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <ui:TextBlock Width="450" HorizontalAlignment="Left" TextAlignment="Left">
                             <Hyperlink NavigateUri="" RequestNavigate="Hyperlink_RequestNavigate">
-                                <TextBlock Text="test Address" />
+                                <TextBlock Text="{Binding ViewModel.SelectedAddress}" HorizontalAlignment="Left"/>
                             </Hyperlink>    
                         </ui:TextBlock>
-                        
-                        <ui:TextBlock Text="맞팔로우 기간" Width="100" TextAlignment="Right" Foreground="white" Margin="0,0,10,0"/>
-                        <ui:TextBlock Text="test Date" Width="150" TextAlignment="Left" Foreground="white" Margin="0,0,10,0"/>
+
+                        <ui:TextBlock Text="맞팔로우 기간" Width="100" HorizontalAlignment="Left" TextAlignment="Right" Foreground="white" FontWeight="Bold" Margin="0,0,10,0"/>
+                        <ui:TextBlock Text="{Binding ViewModel.SelectedDate}" Width="150" HorizontalAlignment="Left" TextAlignment="Left" Foreground="white" Margin="0,0,10,0"/>
                     </StackPanel>
 
-                    <ui:TextBox Width="700" Height="50" Text="test Description" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                            <ui:TextBlock Text="메모" Width="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextAlignment="Right" Foreground="White" FontWeight="Bold" Margin="0,0,10,5"/>
+                            <ui:Button Command="{Binding ViewModel.btnSaveMemoCommand}" Width="60" Height="30" VerticalAlignment="Center" Content="저장" Background="CornflowerBlue" Foreground="Black" FontWeight="Bold"/>
+                        </StackPanel>
+                        
+                        <ui:TextBox Width="600" MinWidth="600" Height="80" Text="{Binding ViewModel.SelectedDescription, Mode=TwoWay}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
 
                 </StackPanel>
                 
