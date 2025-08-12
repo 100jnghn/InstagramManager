@@ -5,7 +5,9 @@ using InstagramManager.MyData;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Collections.ObjectModel;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Reflection.Metadata;
+using System.Runtime.ConstrainedExecution;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.ViewModels.Pages
@@ -25,10 +27,22 @@ namespace InstagramManager.ViewModels.Pages
         private ObservableCollection<FollowForFollowTable> f4fDatabase;
 
         [ObservableProperty]
-        private List<string> id;
+        private ObservableCollection<string> id;
 
         [ObservableProperty]
         private bool isF4FUpdated;
+
+        [ObservableProperty]
+        private string selectedID;
+
+        [ObservableProperty]
+        private string selectedAddress;
+
+        [ObservableProperty]
+        private string selectedDate;
+
+        [ObservableProperty]
+        private string selectedDescription;
 
         #endregion
 
@@ -38,6 +52,7 @@ namespace InstagramManager.ViewModels.Pages
         public DataViewModel(IDatabase<FollowForFollowTable> database) {
             this.database = database;
             this.F4fDatabase = new ObservableCollection<FollowForFollowTable>();
+            this.Id = new();
         }
         #endregion
 
@@ -58,6 +73,8 @@ namespace InstagramManager.ViewModels.Pages
             foreach (var item in database.GetAllData()) {
                 F4fDatabase.Add(item);
             }
+
+            MakeIDList();
         }
 
         #region METHOD
@@ -137,8 +154,7 @@ namespace InstagramManager.ViewModels.Pages
                 }
             }
 
-            // db 만든 후 id만 리스트에 저장
-            MakeIDList();
+
 
             // 뷰에 사용할 f4f데이터 변경
             F4fDatabase.Clear();
@@ -146,16 +162,28 @@ namespace InstagramManager.ViewModels.Pages
             foreach(var entity in database.GetAllData()) {
                 F4fDatabase.Add(entity);
             }
+
+            // db 만든 후 id만 리스트에 저장
+            MakeIDList();
         }
 
         // DB에서 맞팔로우 아이디를 id에 저장
         private void MakeIDList() {
-            Id = F4f.Select(p => p.Value).ToList();
+            Id.Clear();
+
+            foreach (var idValue in database.GetAllData().Select(d => d.Id)) {
+                Id.Add(idValue);
+            }
         }
 
         #endregion
 
         #region COMMAND
+
+        [RelayCommand]
+        private void btnSearch() {
+
+        }
         
         #endregion
     }
