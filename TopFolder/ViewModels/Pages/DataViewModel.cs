@@ -3,6 +3,7 @@ using InstagramManager.Interfaces;
 using InstagramManager.Models;
 using InstagramManager.MyData;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Reflection.Metadata;
 using Wpf.Ui.Abstractions.Controls;
@@ -21,6 +22,9 @@ namespace InstagramManager.ViewModels.Pages
         private IEnumerable<Person> f4f;
 
         [ObservableProperty]
+        private ObservableCollection<FollowForFollowTable> f4fDatabase;
+
+        [ObservableProperty]
         private List<string> id;
 
         [ObservableProperty]
@@ -33,6 +37,7 @@ namespace InstagramManager.ViewModels.Pages
         // 생성자에서 db 초기화
         public DataViewModel(IDatabase<FollowForFollowTable> database) {
             this.database = database;
+            this.F4fDatabase = new ObservableCollection<FollowForFollowTable>();
         }
         #endregion
 
@@ -48,7 +53,11 @@ namespace InstagramManager.ViewModels.Pages
             
         private void InitializeViewModel()
         {
-            _isInitialized = true;
+            F4fDatabase.Clear();
+
+            foreach (var item in database.GetAllData()) {
+                F4fDatabase.Add(item);
+            }
         }
 
         #region METHOD
@@ -130,6 +139,13 @@ namespace InstagramManager.ViewModels.Pages
 
             // db 만든 후 id만 리스트에 저장
             MakeIDList();
+
+            // 뷰에 사용할 f4f데이터 변경
+            F4fDatabase.Clear();
+
+            foreach(var entity in database.GetAllData()) {
+                F4fDatabase.Add(entity);
+            }
         }
 
         // DB에서 맞팔로우 아이디를 id에 저장

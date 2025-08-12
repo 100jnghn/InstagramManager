@@ -37,25 +37,25 @@
         <!-- 페이지 메시지 표시 -->
         <Grid Grid.Row="1">
             <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" FontSize="15" Margin="10,20,0,60">
-                <Run Text="test" Foreground="LightSlateGray" />
+                <Run Text="test" Foreground="LightSlateGray"/>
             </ui:TextBlock>
         </Grid>
 
         <!--맞팔 DataGrid -->
         <Grid Grid.Row="2" Margin="0,0,0,30">
-            <ui:DataGrid x:Name="dgF4F" ItemsSource="{Binding ViewModel.Database}" Width="auto" Height="350" VerticalAlignment="Top" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" Margin="0,0,0,10">
+            <ui:DataGrid x:Name="dgF4F" ItemsSource="{Binding ViewModel.F4fDatabase}" Width="auto" Height="350" VerticalAlignment="Top" HorizontalAlignment="Left" GridLinesVisibility="Horizontal" AutoGenerateColumns="False" Margin="0,0,0,10">
                 <ui:DataGrid.Columns>
                     
                     <!-- 맞팔 아이디 -->
-                    <dg:DataGridTextColumn Header="ID" Binding="{Binding Value}" Width="300"/>
+                    <dg:DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="270"/>
     
                     <!-- 맞팔 인스타 주소 -->
-                    <dg:DataGridTemplateColumn Header="주소" Width="450">
+                    <dg:DataGridTemplateColumn Header="주소" Width="430">
                         <dg:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock>
-                                    <Hyperlink NavigateUri="{Binding Href}" RequestNavigate="Hyperlink_RequestNavigate">
-                                        <TextBlock Text="{Binding Href}" />
+                                    <Hyperlink NavigateUri="{Binding Address}" RequestNavigate="Hyperlink_RequestNavigate">
+                                        <TextBlock Text="{Binding Address}" />
                                     </Hyperlink>    
                                 </TextBlock>
                             </DataTemplate>
@@ -63,7 +63,10 @@
                     </dg:DataGridTemplateColumn>
 
                     <!-- 맞팔로우 기간 (일) -->
-                    <dg:DataGridTextColumn Header="맞팔로우 기간" Binding="{Binding DateFromToday}" Width="250"/>
+                    <dg:DataGridTextColumn Header="맞팔 기간" Binding="{Binding Date}" Width="120" />
+                    
+                    <!-- 메모 -->
+                    <dg:DataGridTextColumn Header="메모" Binding="{Binding Description}" Width="350"/>
                 </ui:DataGrid.Columns>
             </ui:DataGrid>
         </Grid>
@@ -76,21 +79,31 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,20">
                     <ComboBox x:Name="cbxSearchID" Width="300" Height="60" ItemsSource="{Binding ViewModel.Id}" IsEditable="True" Margin="0,0,10,10"/>
-                    <ui:Button x:Name="btnSearchID" Width="60" Height="30" Content="검색" Margin="0,0,0,10" Background="CornflowerBlue" Foreground="Black" FontWeight="Bold"/>
+                    <ui:Button x:Name="btnSearchID" Width="60" Height="30" VerticalAlignment="Center" Content="검색" Margin="0,0,0,10" Background="CornflowerBlue" Foreground="Black" FontWeight="Bold"/>
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="1">
-                <StackPanel Orientation="Vertical" Width="1000">
+                <StackPanel Orientation="Vertical" Width="1000" HorizontalAlignment="Left" Margin="30,0,0,0">
                     <StackPanel Orientation="Horizontal">
-                        <ui:TextBlock Text="test ID" Width="300" Foreground="White" Margin="0,0,10,0"/>
-                        <ui:TextBlock Text="test Address" Width="500" Foreground="White" Margin="0,0,10,0"/>
-                        <ui:TextBlock Text="test Date" Width="130" Foreground="white" Margin="0,0,10,0"/>
+                        
+                        <ui:TextBlock Text="ID" Width="30" TextAlignment="Right" Foreground="White" Margin="0,0,10,0"/>
+                        <ui:TextBlock Text="test ID" Width="250" TextAlignment="Left" Foreground="White" Margin="0,0,10,0"/>
+                        
+                        <ui:TextBlock Text="주소" Width="30" TextAlignment="Right" Foreground="White" Margin="0,0,10,0"/>
+                        <ui:TextBlock Width="450" TextAlignment="Left">
+                            <Hyperlink NavigateUri="" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock Text="test Address" />
+                            </Hyperlink>    
+                        </ui:TextBlock>
+                        
+                        <ui:TextBlock Text="맞팔로우 기간" Width="100" TextAlignment="Right" Foreground="white" Margin="0,0,10,0"/>
+                        <ui:TextBlock Text="test Date" Width="150" TextAlignment="Left" Foreground="white" Margin="0,0,10,0"/>
                     </StackPanel>
 
-                    <ui:TextBox Width="700" Height="50" Margin="0,10,0,0" HorizontalAlignment="Left"/>
+                    <ui:TextBox Width="700" Height="50" Text="test Description" HorizontalAlignment="Left" Margin="0,10,0,0"/>
 
                 </StackPanel>
                 
