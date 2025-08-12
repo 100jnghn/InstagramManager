@@ -171,6 +171,7 @@ namespace InstagramManager.ViewModels.Pages
 
             // DataViewModel의 f4f에 값 전달
             _dataViewModel.F4f = f4fList;
+            _dataViewModel.MakeDatabase();
 
             MessageBox.Show($"맞팔로워 {f4fList.Count()}명의 정보를 생성했습니다.", "알림", MessageBoxButton.OK, MessageBoxImage.Information);
         }

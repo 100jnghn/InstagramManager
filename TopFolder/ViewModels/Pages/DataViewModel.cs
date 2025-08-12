@@ -38,5 +38,29 @@ namespace InstagramManager.ViewModels.Pages
             _isInitialized = true;
         }
 
+        // Dashboard에서 맞팔 정보를 생성하면 호출하는 함수
+        public void MakeDatabase() {
+
+            // db가 없는 경우 -> table에 f4f 전부 할당
+            if (database.GetAllData().Count == 0) {
+
+                foreach (var person in F4f) {
+                    var entity = new FollowForFollowTable
+                    {
+                        Id = person.Value,
+                        Address = person.Href,
+                        Date = person.DateFromToday
+                    };
+
+                    database.InsertData(entity);
+                }
+            }
+
+            // db가 있는 경우 -> table 데이터 지우고 f4f 할당
+            else if (database.GetAllData().Count > 0) {
+                // 값 비교?
+            }
+        }
+
     }
 }

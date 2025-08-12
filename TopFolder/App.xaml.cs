@@ -1,4 +1,5 @@
-﻿using InstagramManager.Models;
+﻿using InstagramManager.Interfaces;
+using InstagramManager.Models;
 using InstagramManager.Services;
 using InstagramManager.ViewModels.Pages;
 using InstagramManager.ViewModels.Windows;
@@ -57,6 +58,7 @@ namespace InstagramManager
 
                 // Postgre DB Context 등록
                 services.AddDbContext<InstagramManagerDatabaseContext>();
+                services.AddSingleton<IDatabase<FollowForFollowTable>, FollowForFollowService>();
 
             }).Build();
 
