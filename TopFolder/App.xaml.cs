@@ -53,8 +53,6 @@ namespace InstagramManager
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<FollowForFollowPage>();
                 services.AddSingleton<FollowForFollowViewModel>();
-                services.AddSingleton<SettingsPage>();
-                services.AddSingleton<SettingsViewModel>();
 
                 // Postgre DB Context 등록
                 services.AddDbContext<InstagramManagerDatabaseContext>();
