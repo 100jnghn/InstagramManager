@@ -5,11 +5,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.Views.Pages
 {
-    public partial class DataPage : INavigableView<DataViewModel>
+    public partial class FollowForFollowPage : INavigableView<FollowForFollowViewModel>
     {
-        public DataViewModel ViewModel { get; }
+        public FollowForFollowViewModel ViewModel { get; }
 
-        public DataPage(DataViewModel viewModel)
+        public FollowForFollowPage(FollowForFollowViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;

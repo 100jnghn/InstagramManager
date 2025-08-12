@@ -15,13 +15,13 @@ namespace InstagramManager.ViewModels.Windows
             {
                 Content = "언팔로워 조회",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
-                TargetPageType = typeof(Views.Pages.DashboardPage)
+                TargetPageType = typeof(Views.Pages.MainPage)
             },
             new NavigationViewItem()
             {
                 Content = "맞팔로우 조회",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
+                TargetPageType = typeof(Views.Pages.FollowForFollowPage)
             }
         };
 

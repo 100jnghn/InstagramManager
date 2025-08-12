@@ -12,7 +12,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.ViewModels.Pages
 {
-    public partial class DataViewModel : ObservableObject, INavigationAware
+    public partial class FollowForFollowViewModel : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -52,7 +52,7 @@ namespace InstagramManager.ViewModels.Pages
         #region CONSTRUCTOR
 
         // 생성자에서 db 초기화
-        public DataViewModel(IDatabase<FollowForFollowTable> database) {
+        public FollowForFollowViewModel(IDatabase<FollowForFollowTable> database) {
             this.database = database;
             this.F4fDatabase = new ObservableCollection<FollowForFollowTable>();
             this.Id = new();

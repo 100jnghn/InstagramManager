@@ -49,10 +49,10 @@ namespace InstagramManager
                 services.AddSingleton<INavigationWindow, MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();
 
-                services.AddSingleton<DashboardPage>();
-                services.AddSingleton<DashboardViewModel>();
-                services.AddSingleton<DataPage>();
-                services.AddSingleton<DataViewModel>();
+                services.AddSingleton<MainPage>();
+                services.AddSingleton<MainViewModel>();
+                services.AddSingleton<FollowForFollowPage>();
+                services.AddSingleton<FollowForFollowViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
 

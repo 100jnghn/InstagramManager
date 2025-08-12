@@ -10,12 +10,12 @@ using ClosedXML.Excel;
 
 namespace InstagramManager.ViewModels.Pages
 {
-    public partial class DashboardViewModel : ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
         #region PROPERTY
 
         [ObservableProperty]
-        private string uploadMessage = "Upload File을 누르고 파일을 업로드해 주세요";
+        private string uploadMessage = "'파일 선택'을 누르고 파일을 업로드해 주세요";
 
         [ObservableProperty]
         private bool isFileUploaded = false;
@@ -35,7 +35,7 @@ namespace InstagramManager.ViewModels.Pages
         [ObservableProperty]
         private IEnumerable<Person> f4f;
 
-        private readonly DataViewModel _dataViewModel;
+        private readonly FollowForFollowViewModel _dataViewModel;
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace InstagramManager.ViewModels.Pages
 
         #region CONSTRUCTOR
 
-        public DashboardViewModel(DataViewModel dataViewModel) {
+        public MainViewModel(FollowForFollowViewModel dataViewModel) {
             _dataViewModel = dataViewModel;
         }
 

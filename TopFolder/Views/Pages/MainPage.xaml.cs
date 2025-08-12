@@ -10,11 +10,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace InstagramManager.Views.Pages
 {
-    public partial class DashboardPage : INavigableView<DashboardViewModel>
+    public partial class MainPage : INavigableView<MainViewModel>
     {
-        public DashboardViewModel ViewModel { get; }
+        public MainViewModel ViewModel { get; }
 
-        public DashboardPage(DashboardViewModel viewModel)
+        public MainPage(MainViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
