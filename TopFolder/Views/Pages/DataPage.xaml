@@ -37,7 +37,7 @@
         <!-- 페이지 메시지 표시 -->
         <Grid Grid.Row="1">
             <ui:TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" FontSize="15" Margin="10,20,0,60">
-                <Run Text="test" Foreground="LightSlateGray"/>
+                <Run Text="맞팔로워 정보를 관리하고 데이터베이스에 저장합니다" Foreground="LightSlateGray"/>
             </ui:TextBlock>
         </Grid>
 
