@@ -193,6 +193,17 @@ ID, 주소, 며칠 동안 팔로우 했는지 / 며칠 전에 팔로우가 끊�
 <br>
 <br>
 
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/8f8abc49-5351-4ceb-a1c4-2577fedf4269" />
+<br>
+
+```
+[데이터베이스에 저장된 데이터 확인]
+```
+
+<br>
+<br>
+<br>
+
 <img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/e5d9facc-9648-49a9-a205-96dc67a244f5" />
 <br>
 
