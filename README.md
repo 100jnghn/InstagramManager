@@ -1,4 +1,4 @@
-# Instagram Manager
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/dbf98b71-6d89-43b3-87f8-a9cb12ae42e3" /># Instagram Manager
 누군가 당신을 언팔로우 했습니다... <br><br>
 누가 언팔로우 했는지, 언제 언팔로우 했는지 알아보세요  🔎 <br>
 맞팔로워들을 데이터베이스에 저장하고 메모를 남겨보세요 📱 <br>
@@ -24,3 +24,95 @@
 ```
 1. 데스크탑 인스타그램 페이지에 접속합니다
 ```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/0a1229fe-87cf-4446-9fe0-cdefea9b0e35" />
+<br>
+
+```
+2. 좌측 하단 '더 보기' 클릭 후 '설정'을 클릭합니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/38acd51d-132a-42f4-babf-3012aba40868" />
+<br>
+
+```
+3. 'Meta 계정 센터'에 접속합니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/25f2225d-436e-4c07-91d1-2d49522039aa" />
+<br>
+
+```
+4. '내 정보 및 권한' 탭에서 '내 정보 내보내기'를 선택합니다
+```
+
+<br>
+<br>
+<br>
+
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/66a7de52-e74e-435c-a115-a9e1e6e63c96" />
+<br>
+
+```
+5. '내보내기 만들기'를 클릭합니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/21b7460a-2096-4e1e-b223-749d8add1c9b" />
+<br>
+
+```
+6. 본인의 인스타그램 프로필을 선택하고 '기기로 내보내기'를 선택합니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/faa3c67f-6a2a-4525-b13d-ef524604f952" />
+<br>
+
+```
+7. 내보내기 확인에서 다음과 같이 옵션을 선택합니다.
+
+A. 알림 받기 : 파일이 완성된 후 알림 받을 메일
+B. 정보 맞춤 설정 : 모두 체크 해제 후 '팔로워 및 팔로잉'만 체크
+C. 기간 : 전체 기간 선택
+D. 형식 : JSON 선택
+
+위 옵션을 모두 설정한 후 내보내기 시작을 클릭합니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/6ad9e6a7-1cb1-40fe-8d6c-eba3b8cd533a" />
+<br>
+
+```
+8. 작업이 완료됐다는 메일을 받은 후 인스타그램에 접속해 Download 버튼을 누른 후
+   계정 비밀번호를 입력해 zip파일을 다운받습니다
+```
+
+<br>
+<br>
+<br>
+
+
