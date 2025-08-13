@@ -162,3 +162,53 @@ ID, 주소, 며칠 동안 팔로우 했는지 / 며칠 전에 팔로우가 끊�
 ```
 '엑셀 파일로 저장' 버튼을 클릭하면 '다운로드' 폴더에 엑셀 파일을 저장합니다
 ```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/8d2f8810-626b-459e-9578-f017ef4206b6" />
+<br>
+
+```
+우측 상단 '맞팔로우 정보 저장' 버튼을 클릭하면 맞팔로워 정보를 생성합니다
+생성된 정보는 개인 데이터베이스에 저장됩니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/103b5178-4c94-4777-8c83-f8e9abb9b4e2" />
+<br>
+
+```
+['맞팔로우 조회' 탭 화면]
+
+개인 데이터를 기반으로 맞팔로우 정보를 출력합니다
+개인 데이터베이스에 저장되기 때문에 프로그램 재시작 시에도 맞팔로우 정보는 삭제되지 않습니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/e5d9facc-9648-49a9-a205-96dc67a244f5" />
+<br>
+
+```
+아이디를 클릭하거나 검색하여 세부 정보를 확인할 수 있습니다.
+```
+
+<br>
+<br>
+<br>
+
+<img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/af3ffbb5-29e8-48c3-8dba-4bcf45a9fb0d" />
+<br>
+
+```
+검색한 아이디에 대해 메모를 남긴 후 '저장' 버튼을 클릭하면
+작성한 메모가 데이터베이스에 저장됩니다
+데이터 그리드에서도 작성한 메모를 확인할 수 있습니다
+```
