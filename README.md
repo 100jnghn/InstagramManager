@@ -115,4 +115,50 @@ D. 형식 : JSON 선택
 <br>
 <br>
 
+## 3. 기능 소개
+<img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/ec2bc8fc-8dc6-4f87-9545-087fd0f95a6c" />
+<br>
 
+```
+프로그램을 실행 화면
+```
+
+<br>
+<br>
+<br>
+
+<img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/762e7759-29ee-49ea-a0fd-38894fb4ac2e" />
+<br>
+
+```
+'파일 선택' 버튼을 눌러 다운받은 zip파일을 그대로 선택해 업로드합니다
+이후 '조회 시작' 버튼을 클릭합니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/ce601015-79b5-466a-82be-a4151132ba15" />
+<br>
+
+```
+['조회 시작' 버튼 클릭 후 화면]
+
+1. 본인을 팔로우하지 않는 계정 정보가 출력됩니다
+2. 최근 팔로우가 끊긴 계정 정보가 출력됩니다
+
+ID, 주소, 며칠 동안 팔로우 했는지 / 며칠 전에 팔로우가 끊겼는지 알 수 있습니다.
+주소를 클릭하면 해당 계정의 인스타그램 페이지로 이동합니다
+```
+
+<br>
+<br>
+<br>
+
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/f76ccfe9-ef58-4297-a268-363052052fa4" />
+<br>
+
+```
+'엑셀 파일로 저장' 버튼을 클릭하면 '다운로드' 폴더에 엑셀 파일을 저장합니다
+```
