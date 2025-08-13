@@ -22,6 +22,12 @@ namespace InstagramManager.ViewModels.Windows
                 Content = "맞팔로우 조회",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.FollowForFollowPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "사용 방법 안내",
+                Icon = new SymbolIcon {Symbol = SymbolRegular.DataHistogram24},
+                TargetPageType = typeof(Views.Pages.GuidePage)
             }
         };
 

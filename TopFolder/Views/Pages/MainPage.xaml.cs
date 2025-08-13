@@ -1,10 +1,6 @@
 ﻿using InstagramManager.ViewModels.Pages;
-using Microsoft.Win32;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Navigation;
 using Wpf.Ui.Abstractions.Controls;
 
