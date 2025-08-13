@@ -17,7 +17,16 @@
 <br>
 <br>
 
-## 2. 사용 방법
+## 2. 실행 영상
+#### ⬇️ Click IMG to play with youtube ⬇️
+<br>
+
+[![IGM](http://img.youtube.com/vi/REvlPg7Xte0/0.jpg)](https://youtu.be/REvlPg7Xte0?t=0s)
+<br>
+<br>
+<br>
+
+## 3. 사용 방법
 <img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/c9562cf9-0cb5-4458-bc55-be3e9c8f5ae7" />
 <br>
 
@@ -115,7 +124,7 @@ D. 형식 : JSON 선택
 <br>
 <br>
 
-## 3. 기능 소개
+## 4. 기능 소개
 <img width="1600" height="1000" alt="image" src="https://github.com/user-attachments/assets/ec2bc8fc-8dc6-4f87-9545-087fd0f95a6c" />
 <br>
 
