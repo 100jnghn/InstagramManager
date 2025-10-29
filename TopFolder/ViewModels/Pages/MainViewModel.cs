@@ -240,15 +240,36 @@ namespace InstagramManager.ViewModels.Pages
             // JSON 데이터 파싱 
             try {
                 parsingFollowerData();
+              
+                UploadMessage = "데이터 조회 성공";
+            }
+            catch (Exception ex) {
+                UploadMessage = $"팔로원 분류 중 오류 발생: {ex.Message}";
+                return;
+            }
+
+            // JSON 데이터 파싱 
+            try {
                 parsingFollowingData();
+          
+                UploadMessage = "데이터 조회 성공";
+            }
+            catch (Exception ex) {
+                UploadMessage = $"팔로잉 분류 중 오류 발생: {ex.Message}";
+                return;
+            }
+
+            // JSON 데이터 파싱 
+            try {
                 parsingRecentlyUnfollowData();
 
                 UploadMessage = "데이터 조회 성공";
             }
             catch (Exception ex) {
-                UploadMessage = $"데이터 분류 중 오류 발생: {ex.Message}";
+                UploadMessage = $"언팔로우 분류 중 오류 발생: {ex.Message}";
                 return;
             }
+
 
             // 나를 팔로우 하지 않는 사람들의 데이터 가져오기
             Unfollowers = myJsonData.GetUnfollowers();
@@ -395,8 +416,8 @@ namespace InstagramManager.ViewModels.Pages
 
                 // 프로필링크, 아이디 추출
                 string href = person["href"].ToString();
-                string value = person["value"].ToString();
-
+                //string value = person["value"].ToString();
+                string value = data["title"].ToString();
 
 
                 // 타임스탬프 추출
